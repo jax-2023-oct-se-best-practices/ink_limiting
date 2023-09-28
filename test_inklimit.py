@@ -32,10 +32,12 @@ def make_pixel(c, m, y, k):
     assert 0 <= k <= 255, f'k must be in range [0, 255]; got {k}'
     return np.array([c, m, y, k], dtype=np.uint8)
 
+
 def make_image(x: int, y: int, pixel: np.ndarray) -> np.ndarray:
     assert x > 0 and y > 0
     assert len(pixel.shape) == 1 and pixel.shape[0] == 4
     return np.broadcast_to(pixel, (x, y, pixel.shape[0])).copy()
+
 
 def compare_images(source_file, target_file, limit):
     assert os.path.isfile(source_file), \
@@ -68,7 +70,7 @@ def almost_equal(a, b) -> bool:
 
 def do_ink_limit_test(limit, to_test):
     input_image = make_image(2, 2, make_pixel(255, 255, 255, 255))
-    input_image[0, 0, :] = make_pixel(10, 10, 10, 10) # under ink limit
+    input_image[0, 0, :] = make_pixel(10, 10, 10, 10)   # under ink limit
     input_image[0, 1, :] = make_pixel(0, 255, 255, 255) # case where UCR fails
     output_image = to_test(input_image, limit)
     max_pixel = np.max(np.sum(output_image, axis=-1))
@@ -97,6 +99,7 @@ def test_e2e_invalid_arg_help():
         text=True)
     assert result.returncode == 1
     assert result.stdout == inklimit.help_text + "\n"
+
 
 if __name__ == "__main__":
     test_unit_inklimit_proportional()
