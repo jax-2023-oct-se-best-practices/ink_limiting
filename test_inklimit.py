@@ -97,3 +97,9 @@ def test_e2e_invalid_arg_help():
         text=True)
     assert result.returncode == 1
     assert result.stdout == inklimit.help_text + "\n"
+
+if __name__ == "__main__":
+    test_unit_inklimit_proportional()
+    # def test_unit_inklimit_ucr():
+    # test_e2e_convert_testimage()
+    # test_e2e_invalid_arg_help()
