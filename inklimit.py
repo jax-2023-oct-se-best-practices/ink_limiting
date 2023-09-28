@@ -45,7 +45,6 @@ def applyInkLimit(inName: str,
     inimg = Image.open(inName, "r")
     arr = np.asarray(inimg)
     outarr = inkLimiter(arr, limit)
-    total_pixels = arr.shape[0]*arr.shape[1]
     outimg = Image.fromarray(outarr, mode="CMYK")
     outimg.save(outName, compression="tiff_deflate")
 
