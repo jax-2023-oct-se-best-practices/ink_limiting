@@ -39,7 +39,7 @@ def make_image(x: int, y: int, pixel: np.ndarray) -> np.ndarray:
     return np.broadcast_to(pixel, (x, y, pixel.shape[0])).copy()
 
 
-def compare_images(source_file, target_file, limit):
+def compare_images(source_file, target_file, limit, listErrors=False):
     assert os.path.isfile(source_file), \
         f"Source file {source_file} doesn't exist"
     assert os.path.isfile(target_file), \
@@ -56,7 +56,7 @@ def compare_images(source_file, target_file, limit):
 
             sums = np.sum(arr, axis=-1)
             overlimit = np.count_nonzero(sums > limit)
-            if overlimit > 0:
+            if listErrors and overlimit > 0:
                 for i in range(sums.shape[0]):
                     for j in range(sums.shape[1]):
                         if sums[i, j] > limit:
