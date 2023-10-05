@@ -2,10 +2,11 @@
 from PIL import Image
 import numpy as np
 import sys
-from typing import Callable, Tuple
+from typing import Callable
 
 
-def ink_limit_proportional(arr: np.ndarray, inkLimit: float = 240.0) -> np.ndarray:
+def ink_limit_proportional(
+        arr: np.ndarray, inkLimit: float = 240.0) -> np.ndarray:
     """
     Do proportional reduction using numpy's operators
     To make it easier to think about, arr and inkLimit
@@ -27,7 +28,7 @@ def ink_limit_proportional(arr: np.ndarray, inkLimit: float = 240.0) -> np.ndarr
     return (cmyks * 255.).astype(np.uint8)
 
 
-def ink_limit_ucr(arr: np.array, inkLimit: float = 240.0) -> np.array:
+def ink_limit_ucr(arr: np.ndarray, inkLimit: float = 240.0) -> np.ndarray:
     """
     Do the UCR ink reduction using numpy ops
     To make it easier, all calculations are in normalized ranges
@@ -53,8 +54,7 @@ def help():
 
 
 def applyInkLimit(
-    inName: str, outName: str, inkLimiter: Callable, limit: float
-) -> Tuple[int, int]:
+        inName: str, outName: str, inkLimiter: Callable, limit: float):
     inimg = Image.open(inName, "r")
     arr = np.asarray(inimg)
     outarr = inkLimiter(arr, limit)
