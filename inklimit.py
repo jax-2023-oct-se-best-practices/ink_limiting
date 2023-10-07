@@ -19,7 +19,7 @@ def ink_limit_proportional(
     Returns:
         np.ndarray: Output array
     """
-    assert arr.shape[2] == 4
+    assert arr.shape[-1] == 4
     assert arr.dtype == np.uint8
     inkLimit = inkLimit / 100.  # range is 0. to 4.
     cmyks = arr / 255.          # range is 0. to 1.
@@ -33,7 +33,7 @@ def ink_limit_ucr(arr: np.ndarray, inkLimit: float = 240.0) -> np.ndarray:
     Do the UCR ink reduction using numpy ops
     To make it easier, all calculations are in normalized ranges
     """
-    assert arr.shape[2] == 4
+    assert arr.shape[-1] == 4
     assert arr.dtype == np.uint8
     inkLimit = inkLimit / 100.  # range is 0. to 4.
     cmyks = arr / 255.          # range is 0. to 1.
